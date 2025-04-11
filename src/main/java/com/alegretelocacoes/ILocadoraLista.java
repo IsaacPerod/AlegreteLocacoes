@@ -1,3 +1,5 @@
+package com.alegretelocacoes;
+
 public interface ILocadoraLista {
     
     void insereInicio(Object elemento);

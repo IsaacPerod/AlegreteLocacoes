@@ -1,9 +1,9 @@
-import java.util.Scanner;
+package com.alegretelocacoes;
 
-import models.Categoria;
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+import java.util.Scanner;
+import com.alegretelocacoes.ListaLocadora;
+import com.alegretelocacoes.models.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
