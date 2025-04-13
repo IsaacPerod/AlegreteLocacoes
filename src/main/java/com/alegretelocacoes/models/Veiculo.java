@@ -1,13 +1,13 @@
 package com.alegretelocacoes.models;
 
 public class Veiculo {
-    private String placa;
-    private String modelo;
-    private String marca;
-    private int ano;
-    private int potencia;
-    private int lugares;
-    private Categoria categoria;
+    private final String placa;
+    private final String modelo;
+    private final String marca;
+    private final int ano;
+    private final int potencia;
+    private final int lugares;
+    private final Categoria categoria;
 
     public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;
@@ -17,10 +17,6 @@ public class Veiculo {
         this.potencia = potencia;
         this.lugares = lugares;
         this.categoria = categoria;
-    }
-
-    public Veiculo(String placa, String modelo, String marca, int ano, int lugares, int potencia, Categoria categoria) {
-
     }
 
     public String getPlaca() {

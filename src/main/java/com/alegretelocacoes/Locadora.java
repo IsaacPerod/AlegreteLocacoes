@@ -123,7 +123,83 @@ public class Locadora {
     }
 
     private static void gerenciarVeiculos() {
-        System.out.println("Função a ser implementada.");
+        //    public Veiculo(String placa, String modelo, String marca,
+        //    int ano, int potencia, int lugares, Categoria categoria)
+        System.out.println("1. Adicionar Veículo");
+        System.out.println("2. Excluir Veículo");
+        System.out.println("3. Listar Veículos");
+        System.out.println("4. Editar Veículo");
+        System.out.println("0. Voltar");
+        int op = scanner.nextInt();
+        scanner.nextLine();
+        if (op == 1) {
+            // Seria interessante verificar se veículo já existe
+            System.out.print("Placa: ");
+            String placa = scanner.nextLine();
+
+            System.out.print("Modelo: ");
+            String modelo = scanner.nextLine();
+
+            System.out.print("Marca: ");
+            String marca = scanner.nextLine();
+
+            System.out.print("Ano: ");
+            int ano = scanner.nextInt();
+
+            System.out.print("Potência: ");
+            int potencia = scanner.nextInt();
+
+            System.out.print("Número de Lugares: ");
+            int lugares = scanner.nextInt();
+
+            String categorias =
+                    "\n1 - 1010;esportivo\n" +
+                    "2 - 1011;sedan comptacto\n" +
+                    "3 - 1012;sedan medio\n" +
+                    "4 - 1013;SUV compacto\n" +
+                    "5 - 1014;SUV\n" +
+                    "6 - 1015;caminhonete\n" +
+                    "7 - 1016;hatch";
+            System.out.println("Categorias: " + categorias);
+
+            int escolhaCategoria = scanner.nextInt();
+
+            Categoria categoria;
+            switch (escolhaCategoria) {
+                case 1:
+                    categoria = new Categoria("esportivo", 1010);
+                    break;
+                case 2:
+                    categoria = new  Categoria("sedan compacto", 1011);
+                    break;
+                case 3:
+                    categoria = new  Categoria("sedan medio", 1012);
+                    break;
+                case 4:
+                    categoria = new  Categoria("SUV compacto", 1013);
+                    break;
+                case 5:
+                    categoria = new  Categoria("SUV", 1014);
+                    break;
+                case 6:
+                    categoria = new  Categoria("caminhonete", 1015);
+                    break;
+                case 7:
+                    categoria = new  Categoria("hatch", 1016);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Código inválido: " + escolhaCategoria);
+            }
+            veiculos.insereFim(new Veiculo(placa, modelo, marca, ano, potencia, lugares, categoria));
+        }
+
+        if (op == 2) {
+            System.out.println("Implementar");
+            //veiculos.remove();
+        }
+        if (op == 3) {
+            veiculos.imprimeTras();
+        }
     }
 
     private static void gerenciarCategorias() {
