@@ -31,7 +31,7 @@ public class LocacaoService {
             case 2: excluirLocacao(); break;
             case 3: locacoes.imprimeDoComeco(); break;
             case 4: locacoes.imprimeDoFim(); break;
-            default: System.out.println("Opção inválida!");
+            default: System.out.println("Opcao invalida!");
         }
     }
 
@@ -41,7 +41,7 @@ public class LocacaoService {
         Cliente cliente = (Cliente) clientes.busca(cpf);
 
         if (cliente == null) {
-            System.out.println("Cliente não encontrado!");
+            System.out.println("Cliente nao encontrado!");
             return;
         }
 
@@ -49,49 +49,49 @@ public class LocacaoService {
         String cnh = scanner.nextLine();
 
         if (!cliente.getCnh().equals(cnh)) {
-            System.out.println("CNH não corresponde ao cliente informado!");
+            System.out.println("CNH nao corresponde ao cliente informado!");
             return;
         }
 
-        System.out.print("Placa do veículo: ");
+        System.out.print("Placa do veiculo: ");
         String placa = scanner.nextLine();
         Veiculo veiculo = (Veiculo) veiculos.busca(placa);
 
         if (veiculo == null) {
-            System.out.println("Veículo não encontrado!");
+            System.out.println("Veiculo não encontrado!");
             return;
         }
 
         Locacao locacaoExistente = (Locacao) locacoes.busca(placa);
         if (locacaoExistente != null) {
-            System.out.println("Veículo já está locado!");
+            System.out.println("Veiculo ja esta locado!");
             return;
         }
 
         System.out.print("Data de retirada (dd/MM/yyyy): ");
         String dataRetirada = scanner.nextLine();
-        System.out.print("Data de devolução (dd/MM/yyyy): ");
+        System.out.print("Data de devolucao (dd/MM/yyyy): ");
         String dataDevolucao = scanner.nextLine();
-        System.out.print("Valor da diária (R$): ");
+        System.out.print("Valor da diaria (R$): ");
         double valorDiaria = scanner.nextDouble();
         scanner.nextLine();
 
         try {
             Locacao novaLocacao = new Locacao(cnh, placa, dataRetirada, dataDevolucao, valorDiaria);
             locacoes.insereFim(novaLocacao);
-            System.out.println("Locação registrada com sucesso!");
+            System.out.println("Locacao registrada com sucesso!");
         } catch (ParseException e) {
             System.out.println("Erro no formato das datas. Use dd/MM/yyyy.");
         }
     }
 
     private void excluirLocacao() {
-        System.out.print("Placa do veículo: ");
+        System.out.print("Placa do veiculo: ");
         String placa = scanner.nextLine();
         if (locacoes.remove(placa)) {
-            System.out.println("Locação excluída com sucesso!");
+            System.out.println("Locacao excluida com sucesso!");
         } else {
-            System.out.println("Locação não encontrada!");
+            System.out.println("Locacao nao encontrada!");
         }
     }
 }

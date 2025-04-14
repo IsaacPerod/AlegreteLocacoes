@@ -43,8 +43,8 @@ public class Locacao {
 
     @Override
     public String toString() {
-        return "Locação: Cliente CNH " + cnhCliente + ", Veículo Placa " + placaVeiculo + 
-               ", Retirada: " + dataRetirada + ", Devolução: " + dataDevolucao +
-               ", Valor Diária: R$ " + valorDiaria + ", Total a Pagar: R$ " + valorAPagar;
+        return "Locacao: Cliente CNH " + cnhCliente + ", Veiculo Placa " + placaVeiculo + 
+               ", Retirada: " + dataRetirada + ", Devolucao: " + dataDevolucao +
+               ", Valor Diaria: R$ " + valorDiaria + ", Total a Pagar: R$ " + valorAPagar;
     }
 }

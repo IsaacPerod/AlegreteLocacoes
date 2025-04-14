@@ -79,12 +79,12 @@ public class ClienteService {
     }
 
     private void excluirCliente() {
-        System.out.print("CPF do cliente a ser excluído: ");
+        System.out.print("CPF do cliente a ser excluido: ");
         String cpf = scanner.nextLine();
         Cliente cliente = (Cliente) clientes.busca(cpf);
 
         if (cliente == null) {
-            System.out.println("Cliente não encontrado!");
+            System.out.println("Cliente nao encontrado!");
             return;
         }
 
@@ -93,7 +93,7 @@ public class ClienteService {
         while (atual != null) {
             Locacao locacao = (Locacao) atual.getInfo();
             if (locacao != null && locacao.getCnhCliente().equals(cliente.getCnh())) {
-                System.out.println("Não é possível excluir o cliente. Ele está atrelado a uma locação.");
+                System.out.println("Nao eh possivel excluir o cliente. Ele esta atrelado a uma locação.");
                 return;
             }
             atual = atual.getProx();
@@ -101,7 +101,7 @@ public class ClienteService {
 
         // Remover cliente
         if (clientes.remove(cpf)) {
-            System.out.println("Cliente excluído com sucesso!");
+            System.out.println("Cliente excluido com sucesso!");
         } else {
             System.out.println("Erro ao excluir o cliente.");
         }

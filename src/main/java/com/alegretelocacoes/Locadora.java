@@ -2,13 +2,10 @@ import java.util.Scanner;
 
 import models.Categoria;
 import models.Cliente;
-import models.Locacao;
 import models.Veiculo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.text.ParseException;
-import java.util.Scanner;
 
 public class Locadora {
     private static ListaLocadora clientes = new ListaLocadora();
@@ -28,8 +25,11 @@ public class Locadora {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
         }
 
-        // Dados de exemplo adicionais (opcional)
+        // Adicionar clientes de exemplo
         clientes.insereFim(new Cliente("Joao da Silva", "5482156", "(55)3325-2525", "02408925469"));
+        clientes.insereFim(new Cliente("Maria Oliveira", "5482157", "(55)3325-2526", "02408925470"));
+        clientes.insereFim(new Cliente("Carlos Pereira", "5482158", "(55)3325-2527", "02408925471"));
+
 
         while (true) {
             exibirMenu();
