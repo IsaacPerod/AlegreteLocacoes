@@ -1,7 +1,10 @@
-import models.Categoria;
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+package com.alegretelocacoes;
+
+import com.alegretelocacoes.ILocadoraLista;
+import com.alegretelocacoes.models.Categoria;
+import com.alegretelocacoes.models.Cliente;
+import com.alegretelocacoes.models.Locacao;
+import com.alegretelocacoes.models.Veiculo;
 
 public class ListaLocadora implements ILocadoraLista {
     private RegistroLocadora inicio;
