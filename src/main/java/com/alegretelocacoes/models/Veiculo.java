@@ -38,6 +38,6 @@ public class Veiculo {
     @Override
     public String toString() {
         return "Veículo: " + modelo + " (" + marca + "), Placa: " + placa + ", Ano: " + ano + 
-               ", Potência: " + potencia + ", Lugares: " + lugares + ", Categoria: " + categoria.getNome();
+               ", Potência: " + potencia + ", Lugares: " + lugares + ", Categoria: " + categoria;
     }
 }

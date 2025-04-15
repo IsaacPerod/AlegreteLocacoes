@@ -13,20 +13,36 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public String getCpf() {
         return cpf;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
     public String getCnh() {
         return cnh;
     }
 
+    public void setCnh(String cnh) {
+        this.cnh = cnh;
+    }
+
     @Override
     public String toString() {
         return "Cliente: " + nome + ", CNH: " + cnh + ", Telefone: " + telefone + ", CPF: " + cpf;
     }
-
-    // Getters e setters para edição
-    public void setNome(String nome) { this.nome = nome; }
-    public void setTelefone(String telefone) { this.telefone = telefone; }
 }
