@@ -19,8 +19,8 @@ public class Locadora {
     public static void main(String[] args) {
         // Inicializar listas a partir dos arquivos CSV
         try {
-            lerCategoriasCSV("Categorias.csv");
-            lerVeiculosCSV("Veiculos.csv");
+            lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\Categorias.csv");
+            lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\Veiculos.csv");
         } catch (IOException e) {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
         }
