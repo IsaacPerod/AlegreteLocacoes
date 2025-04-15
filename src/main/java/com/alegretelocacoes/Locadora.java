@@ -118,9 +118,9 @@ public class Locadora {
             clientes.insereFim(new Cliente(nome, cnh, telefone, cpf));
             System.out.println("Cliente adicionado!");
         } else if (op == 2) {
-            clientes.imprimeFrente();
+            clientes.imprimeDoComeco();
         } else if (op == 3) {
-            clientes.imprimeTras();
+            clientes.imprimeDoFim() ;
         }
     }
 

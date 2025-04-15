@@ -6,8 +6,8 @@ public interface ILocadoraLista {
     void insereFim(Object elemento);
     boolean remove(String chave);
     Object busca(String chave);
-    void imprimeFrente();
-    void imprimeTras();
+    void imprimeDoComeco();
+    void imprimeDoFim();
     boolean estahVazia();
     int tamanho();
 }

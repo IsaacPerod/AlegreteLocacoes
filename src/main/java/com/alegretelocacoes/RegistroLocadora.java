@@ -1,9 +1,9 @@
 package com.alegretelocacoes;
 
 public class RegistroLocadora {
-    private Object info;           // Armazena o registro (Object)
-    private RegistroLocadora ant;  // Referência ao registro anterior
-    private RegistroLocadora prox; // Referência ao registro próximo
+    private Object info;
+    private RegistroLocadora ant;
+    private RegistroLocadora prox;
 
     public RegistroLocadora(Object info) {
         this.info = info;

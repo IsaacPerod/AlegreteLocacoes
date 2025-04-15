@@ -15,6 +15,10 @@ public class ListaLocadora implements ILocadoraLista {
         this.fim = null;
     }
 
+    public RegistroLocadora getInicio() {
+        return inicio;
+    }
+
     @Override
     public void insereInicio(Object elemento) {
         RegistroLocadora novo = new RegistroLocadora(elemento);
@@ -90,7 +94,7 @@ public class ListaLocadora implements ILocadoraLista {
     }
 
     @Override
-    public void imprimeFrente() {
+    public void imprimeDoComeco() {
         RegistroLocadora atual = inicio;
         while (atual != null) {
             System.out.println(atual.getInfo().toString());
@@ -99,7 +103,7 @@ public class ListaLocadora implements ILocadoraLista {
     }
 
     @Override
-    public void imprimeTras() {
+    public void imprimeDoFim() {
         RegistroLocadora atual = fim;
         while (atual != null) {
             System.out.println(atual.getInfo().toString());
