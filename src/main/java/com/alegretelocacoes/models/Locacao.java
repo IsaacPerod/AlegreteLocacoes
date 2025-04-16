@@ -6,19 +6,13 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class Locacao {
-<<<<<<< HEAD
-    private final String cnhCliente;
-    private final String placaVeiculo;
-    private final String dataRetirada;
-    private final String dataDevolucao;
-=======
     private String cnhCliente;
     private String placaVeiculo;
     private String dataRetirada;
     private String dataDevolucao;
     private double valorDiaria;
     private double valorAPagar;
->>>>>>> origin/isaac
+
 
     public Locacao(String cnhCliente, String placaVeiculo, String dataRetirada, String dataDevolucao, double valorDiaria) throws ParseException {
         this.cnhCliente = cnhCliente;

@@ -1,13 +1,13 @@
 package com.alegretelocacoes.models;
 
 public class Veiculo {
-    private final String placa;
-    private final String modelo;
-    private final String marca;
-    private final int ano;
-    private final int potencia;
-    private final int lugares;
-    private final Categoria categoria;
+    private String placa;
+    private String modelo;
+    private String marca;
+    private int ano;
+    private int potencia;
+    private int lugares;
+    private Categoria categoria;
 
     public Veiculo(String placa, String modelo, String marca, int ano, int potencia, int lugares, Categoria categoria) {
         this.placa = placa;
@@ -17,6 +17,12 @@ public class Veiculo {
         this.potencia = potencia;
         this.lugares = lugares;
         this.categoria = categoria;
+    }
+
+    @Override
+    public String toString() {
+        return "Veículo: " + modelo + " (" + marca + "), Placa: " + placa + ", Ano: " + ano + 
+               ", Potência: " + potencia + ", Lugares: " + lugares + ", Categoria: " + categoria;
     }
 
     public String getPlaca() {
@@ -35,9 +41,32 @@ public class Veiculo {
         return categoria;
     }
 
-    @Override
-    public String toString() {
-        return "Veículo: " + modelo + " (" + marca + "), Placa: " + placa + ", Ano: " + ano + 
-               ", Potência: " + potencia + ", Lugares: " + lugares + ", Categoria: " + categoria;
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setAno(int ano) {
+        this.ano = ano;
+    }
+
+    public void setPotencia(int potencia) {
+        this.potencia = potencia;
+    }
+
+    public void setLugares(int lugares) {
+        this.lugares = lugares;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }

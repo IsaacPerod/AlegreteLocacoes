@@ -1,4 +1,5 @@
-package com.alegretelocacoes;
+package com.alegretelocacoes.utils;
+import com.alegretelocacoes.interfaces.ILocadoraLista;
 import com.alegretelocacoes.models.*;
 
 public class ListaLocadora implements ILocadoraLista {

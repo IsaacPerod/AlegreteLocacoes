@@ -1,27 +1,32 @@
 package com.alegretelocacoes;
 
 import java.util.Scanner;
-import com.alegretelocacoes.ListaLocadora;
+
 import com.alegretelocacoes.models.*;
+import com.alegretelocacoes.services.ClienteService;
+import com.alegretelocacoes.services.LocacaoService;
+import com.alegretelocacoes.services.VeiculoService;
+import com.alegretelocacoes.utils.ListaLocadora;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Locadora {
+public class App {
     private static ListaLocadora clientes = new ListaLocadora();
     private static ListaLocadora locacoes = new ListaLocadora();
     private static ClienteService clienteService = new ClienteService(clientes, locacoes);
     private static ListaLocadora veiculos = new ListaLocadora();
     private static ListaLocadora categorias = new ListaLocadora();
     private static LocacaoService locacaoService = new LocacaoService(locacoes, clientes, veiculos);
+    private static VeiculoService veiculoService = new VeiculoService();
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Inicializar listas a partir dos arquivos CSV
         try {
-            lerCategoriasCSV("Categorias.csv");
-            lerVeiculosCSV("Veiculos.csv");
+            lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\Categorias.csv");
+            lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\Veiculos.csv");
         } catch (IOException e) {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
         }
@@ -120,89 +125,33 @@ public class Locadora {
             clientes.insereFim(new Cliente(nome, cnh, telefone, cpf));
             System.out.println("Cliente adicionado!");
         } else if (op == 2) {
-            clientes.imprimeFrente();
+            clientes.imprimeDoComeco();
         } else if (op == 3) {
-            clientes.imprimeTras();
+            clientes.imprimeDoFim();
         }
     }
 
     private static void gerenciarVeiculos() {
-        //    public Veiculo(String placa, String modelo, String marca,
-        //    int ano, int potencia, int lugares, Categoria categoria)
-        System.out.println("1. Adicionar Veículo");
-        System.out.println("2. Excluir Veículo");
-        System.out.println("3. Listar Veículos");
-        System.out.println("4. Editar Veículo");
+        System.out.println("1. Criar Veículo");
+        System.out.println("2. Listar Veículo");
+        System.out.println("3. Atualizar Veículos");
+        System.out.println("4. Remover Veículo");
         System.out.println("0. Voltar");
         int op = scanner.nextInt();
         scanner.nextLine();
+        //scanner.close();
         if (op == 1) {
-            // Seria interessante verificar se veículo já existe
-            System.out.print("Placa: ");
-            String placa = scanner.nextLine();
-
-            System.out.print("Modelo: ");
-            String modelo = scanner.nextLine();
-
-            System.out.print("Marca: ");
-            String marca = scanner.nextLine();
-
-            System.out.print("Ano: ");
-            int ano = scanner.nextInt();
-
-            System.out.print("Potência: ");
-            int potencia = scanner.nextInt();
-
-            System.out.print("Número de Lugares: ");
-            int lugares = scanner.nextInt();
-
-            String categorias =
-                    "\n1 - 1010;esportivo\n" +
-                    "2 - 1011;sedan comptacto\n" +
-                    "3 - 1012;sedan medio\n" +
-                    "4 - 1013;SUV compacto\n" +
-                    "5 - 1014;SUV\n" +
-                    "6 - 1015;caminhonete\n" +
-                    "7 - 1016;hatch";
-            System.out.println("Categorias: " + categorias);
-
-            int escolhaCategoria = scanner.nextInt();
-
-            Categoria categoria;
-            switch (escolhaCategoria) {
-                case 1:
-                    categoria = new Categoria("esportivo", 1010);
-                    break;
-                case 2:
-                    categoria = new  Categoria("sedan compacto", 1011);
-                    break;
-                case 3:
-                    categoria = new  Categoria("sedan medio", 1012);
-                    break;
-                case 4:
-                    categoria = new  Categoria("SUV compacto", 1013);
-                    break;
-                case 5:
-                    categoria = new  Categoria("SUV", 1014);
-                    break;
-                case 6:
-                    categoria = new  Categoria("caminhonete", 1015);
-                    break;
-                case 7:
-                    categoria = new  Categoria("hatch", 1016);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Código inválido: " + escolhaCategoria);
-            }
-            veiculos.insereFim(new Veiculo(placa, modelo, marca, ano, potencia, lugares, categoria));
+            veiculoService.criarVeiculo(veiculos, categorias);  
+             
         }
-
         if (op == 2) {
-            System.out.println("Implementar");
-            //veiculos.remove();
+            veiculoService.listarVeiculos(veiculos);
         }
         if (op == 3) {
-            veiculos.imprimeTras();
+            veiculoService.atualizarVeiculos(veiculos);
+        }
+        if (op == 4) {
+            veiculoService.removerVeiculo(veiculos);
         }
     }
 

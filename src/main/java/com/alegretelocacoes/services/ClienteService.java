@@ -1,7 +1,10 @@
+package com.alegretelocacoes.services;
+
 import java.util.Scanner;
 
-import models.Cliente;
-import models.Locacao;
+import com.alegretelocacoes.models.*;
+import com.alegretelocacoes.utils.ListaLocadora;
+import com.alegretelocacoes.utils.RegistroLocadora;
 
 public class ClienteService {
     private ListaLocadora clientes;

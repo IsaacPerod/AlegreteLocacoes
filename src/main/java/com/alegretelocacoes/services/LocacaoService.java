@@ -1,6 +1,7 @@
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+package com.alegretelocacoes.services;
+
+import com.alegretelocacoes.models.*;
+import com.alegretelocacoes.utils.ListaLocadora;
 
 import java.text.ParseException;
 import java.util.Scanner;
