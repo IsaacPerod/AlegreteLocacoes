@@ -3,19 +3,24 @@ package com.alegretelocacoes.utils;
 import com.alegretelocacoes.interfaces.ILocadoraLista;
 import com.alegretelocacoes.models.*;
 
+/** Lista duplamente encadeada para armazenar elementos da locadora */
 public class ListaLocadora implements ILocadoraLista {
+    /** Nós da lista */
     private RegistroLocadora inicio;
     private RegistroLocadora fim;
 
+    /** Construtor - inicializa lista vazia */
     public ListaLocadora() {
         this.inicio = null;
         this.fim = null;
     }
 
+    /** @return Primeiro nó da lista */
     public RegistroLocadora getInicio() {
         return inicio;
     }
 
+    /** @param elemento Elemento a ser inserido no início da lista */
     @Override
     public void insereInicio(Object elemento) {
         RegistroLocadora novo = new RegistroLocadora(elemento);
@@ -29,6 +34,7 @@ public class ListaLocadora implements ILocadoraLista {
         }
     }
 
+    /** @param elemento Elemento a ser inserido no fim da lista */
     @Override
     public void insereFim(Object elemento) {
         RegistroLocadora novo = new RegistroLocadora(elemento);
@@ -42,6 +48,11 @@ public class ListaLocadora implements ILocadoraLista {
         }
     }
 
+    /**
+     * Remove elemento pela chave
+     * @param chave Identificador do elemento
+     * @return true se removido com sucesso
+     */
     @Override
     public boolean remove(String chave) {
         RegistroLocadora noRemover = buscaRegistro(chave); // Ajustado para o novo nome
@@ -72,13 +83,22 @@ public class ListaLocadora implements ILocadoraLista {
         return true;
     }
 
+    /**
+     * Busca elemento pela chave
+     * @param chave Identificador do elemento
+     * @return Elemento encontrado ou null
+     */
     @Override
     public Object busca(String chave) {
         RegistroLocadora atual = buscaRegistro(chave);
         return (atual != null) ? atual.getInfo() : null;
     }
 
-    // Método auxiliar para buscar o registro (renomeado de buscaNo para buscaRegistro)
+    /**
+     * Busca nó pela chave
+     * @param chave Identificador do elemento
+     * @return Nó encontrado ou null
+     */
     private RegistroLocadora buscaRegistro(String chave) {
         RegistroLocadora atual = inicio;
         while (atual != null) {
@@ -90,8 +110,15 @@ public class ListaLocadora implements ILocadoraLista {
         return null;
     }
 
+    /** Imprime elementos do início ao fim */
     @Override
     public void imprimeDoComeco() {
+        if (estahVazia()) {
+            System.out.println("\n╔════════════════════════════════╗");
+            System.out.println("║  Não há registros para exibir. ║");
+            System.out.println("╚════════════════════════════════╝");
+            return;
+        }
         RegistroLocadora atual = inicio;
         while (atual != null) {
             System.out.println(atual.getInfo().toString());
@@ -99,8 +126,15 @@ public class ListaLocadora implements ILocadoraLista {
         }
     }
 
+    /** Imprime elementos do fim ao início */
     @Override
     public void imprimeDoFim() {
+        if (estahVazia()) {
+            System.out.println("\n╔════════════════════════════════╗");
+            System.out.println("║  Não há registros para exibir. ║");
+            System.out.println("╚════════════════════════════════╝");
+            return;
+        }
         RegistroLocadora atual = fim;
         while (atual != null) {
             System.out.println(atual.getInfo().toString());
@@ -108,11 +142,13 @@ public class ListaLocadora implements ILocadoraLista {
         }
     }
 
+    /** @return true se lista vazia */
     @Override
     public boolean estahVazia() {
         return inicio == null;
     }
 
+    /** @return Número de elementos na lista */
     @Override
     public int tamanho() {
         int tam = 0;
@@ -124,7 +160,12 @@ public class ListaLocadora implements ILocadoraLista {
         return tam;
     }
 
-    // Método auxiliar para verificar a chave dependendo do tipo de objeto
+    /**
+     * Verifica se objeto corresponde à chave
+     * @param dado Objeto a verificar
+     * @param chave Chave para comparação
+     * @return true se corresponde
+     */
     private boolean matchesChave(Object dado, String chave) {
         if (dado instanceof Cliente) {
             return ((Cliente) dado).getCpf().equals(chave);

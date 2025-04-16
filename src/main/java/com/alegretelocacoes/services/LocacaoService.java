@@ -35,12 +35,12 @@ public class LocacaoService {
         scanner.nextLine();
 
         switch (op) {
-            case 1: incluirLocacao(); break;
-            case 2: excluirLocacao(); break;
-            case 3: locacoes.imprimeDoComeco(); break;
-            case 4: locacoes.imprimeDoFim(); break;
+            case 1: incluirLocacao(); gerenciarLocacoes(); break;
+            case 2: excluirLocacao(); gerenciarLocacoes(); break;
+            case 3: locacoes.imprimeDoComeco(); gerenciarLocacoes(); break;
+            case 4: locacoes.imprimeDoFim(); gerenciarLocacoes(); break;
             case 0: return;
-            default: System.out.println("Opcao invalida!");
+            default: System.out.println("Opcao invalida!"); gerenciarLocacoes();
         }
     }
 

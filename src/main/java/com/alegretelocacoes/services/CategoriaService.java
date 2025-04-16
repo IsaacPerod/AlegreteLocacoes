@@ -188,13 +188,6 @@ public class CategoriaService {
         }
     }
 
-    private void listarCategorias() {
-        System.out.println("\nCategorias listadas do começo para o fim:");
-        listarCategoriasFrente();
-        System.out.println("\nCategorias listadas do fim para o começo:");
-        listarCategoriasTras();
-    }
-
     private void excluirCategoria() {
         System.out.print("Digite o identificador da categoria a ser excluída: ");
         int id = scanner.nextInt();

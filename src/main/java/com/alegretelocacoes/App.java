@@ -39,7 +39,6 @@ public class App {
         clientes.insereFim(new Cliente("Maria Oliveira", "5482157", "(55)3325-2526", "02408925470"));
         clientes.insereFim(new Cliente("Carlos Pereira", "5482158", "(55)3325-2527", "02408925471"));
 
-
         while (true) {
             exibirMenu();
             int opcao = scanner.nextInt();
