@@ -1,10 +1,10 @@
-package com.alegretelocacoes.services;
+package services;
 
 import java.util.Scanner;
 
-import com.alegretelocacoes.models.*;
-import com.alegretelocacoes.utils.ListaLocadora;
-import com.alegretelocacoes.utils.RegistroLocadora;
+import models.*;
+import utils.ListaLocadora;
+import utils.RegistroLocadora;
 
 
 public class ClienteService {
@@ -18,30 +18,32 @@ public class ClienteService {
     }
 
     public void gerenciarClientes() {
-        System.out.println("\n╔════════════════════════════════════════╗");
-        System.out.println("║         GERENCIAR CLIENTES             ║");
-        System.out.println("╠════╗═══════════════════════════════════╣");
-        System.out.println("║ 1  ║ Incluir Cliente                   ║");
-        System.out.println("║ 2  ║ Imprimir Clientes do começo       ║");
-        System.out.println("║ 3  ║ Imprimir Clientes do fim          ║");
-        System.out.println("║ 4  ║ Editar Cliente                    ║");
-        System.out.println("║ 5  ║ Excluir Cliente                   ║");
-        System.out.println("╠════╝═══════════════════════════════════╣");
-        System.out.println("║ 0  Voltar                              ║");
-        System.out.println("╚════════════════════════════════════════╝");
-        
-        System.out.print("Escolha: ");
-        int op = scanner.nextInt();
-        scanner.nextLine();
+        while (true) {
+            System.out.println("\n╔════════════════════════════════════════╗");
+            System.out.println("║         GERENCIAR CLIENTES             ║");
+            System.out.println("╠════╗═══════════════════════════════════╣");
+            System.out.println("║ 1  ║ Incluir Cliente                   ║");
+            System.out.println("║ 2  ║ Imprimir Clientes do começo       ║");
+            System.out.println("║ 3  ║ Imprimir Clientes do fim          ║");
+            System.out.println("║ 4  ║ Editar Cliente                    ║");
+            System.out.println("║ 5  ║ Excluir Cliente                   ║");
+            System.out.println("╠════╝═══════════════════════════════════╣");
+            System.out.println("║ 0  Voltar                              ║");
+            System.out.println("╚════════════════════════════════════════╝");
+            
+            System.out.print("Escolha: ");
+            int op = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (op) {
-            case 1: incluirCliente(); break;
-            case 2: clientes.imprimeDoComeco(); break;
-            case 3: clientes.imprimeDoFim(); break;
-            case 4: editarCliente(); break;
-            case 5: excluirCliente(); break;
-            case 0: return;
-            default: System.out.println("Opcao invalida!");
+            switch (op) {
+                case 1: incluirCliente(); break;
+                case 2: clientes.imprimeDoComeco(); break;
+                case 3: clientes.imprimeDoFim(); break;
+                case 4: editarCliente(); break;
+                case 5: excluirCliente(); break;
+                case 0: return;
+                default: System.out.println("Opcao invalida!");
+            }
         }
     }
 
@@ -101,7 +103,7 @@ public class ClienteService {
         }
 
         // Verificar se o cliente está atrelado a uma locação
-        RegistroLocadora atual = locacoes.getInicio(); // Supondo que exista um método para obter o início da lista
+        RegistroLocadora atual = locacoes.getInicio();
         while (atual != null) {
             Locacao locacao = (Locacao) atual.getInfo();
             if (locacao != null && locacao.getCnhCliente().equals(cliente.getCnh())) {

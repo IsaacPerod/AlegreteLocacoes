@@ -1,137 +1,24 @@
-package com.alegretelocacoes.services;
+package services;
 
-import com.alegretelocacoes.models.Categoria;
-import com.alegretelocacoes.utils.RegistroLocadora;
-import com.alegretelocacoes.utils.ListaLocadora;
+import models.Categoria;
+import models.Veiculo;
+import utils.ListaLocadora;
+import utils.RegistroLocadora;
 
-import java.io.*;
 import java.util.Scanner;
 
 public class CategoriaService {
-    private RegistroLocadora inicio;
-    private RegistroLocadora fim;
-    private final Scanner scanner = new Scanner(System.in);
+    private ListaLocadora categorias;
+    private ListaLocadora veiculos;
 
-    public CategoriaService(ListaLocadora categorias) {
-        this.inicio = categorias.getInicio();
+    public CategoriaService(ListaLocadora categorias, ListaLocadora veiculos) {
+        this.categorias = categorias;
+        this.veiculos = veiculos;
     }
 
-    public boolean adicionarCategoria(Categoria nova) {
-        if (buscarCategoria(String.valueOf(nova.getIdentificador())) != null) {
-            System.out.println("Categoria já existe.");
-            return false; // já existe
-        }
-        insereFim(nova);
-        System.out.println("Categoria adicionada com sucesso!");
-        return true;
-    }
+    public void gerenciarCategorias() {
+        Scanner scanner = new Scanner(System.in);
 
-    public boolean editarCategoria(int id, String novoNome) {
-        RegistroLocadora atual = buscarRegistro(String.valueOf(id));
-        if (atual != null) {
-            Categoria c = (Categoria) atual.getInfo();
-            c.setNome(novoNome);
-            System.out.println("Categoria editada com sucesso!");
-            return true;
-        }
-        System.out.println("Categoria não encontrada.");
-        return false;
-    }
-
-    public boolean excluirCategoria(int id) {
-        if (temVeiculosAtrelados(id)) {
-            System.out.println("Não é possível excluir a categoria. Existe um veículo atrelado.");
-            return false;
-        }
-
-        RegistroLocadora atual = buscarRegistro(String.valueOf(id));
-        if (atual == null) {
-            System.out.println("Categoria não encontrada.");
-            return false;
-        }
-
-        // Remover da lista
-        if (atual == inicio && atual == fim) {
-            inicio = null;
-            fim = null;
-        } else if (atual == inicio) {
-            inicio = atual.getProx();
-            inicio.setAnt(null);
-        } else if (atual == fim) {
-            fim = atual.getAnt();
-            fim.setProx(null);
-        } else {
-            atual.getAnt().setProx(atual.getProx());
-            atual.getProx().setAnt(atual.getAnt());
-        }
-
-        System.out.println("Categoria excluída com sucesso!");
-        return true;
-    }
-
-    public void listarCategoriasFrente() {
-        RegistroLocadora atual = inicio;
-        while (atual != null) {
-            System.out.println(atual.getInfo());
-            atual = atual.getProx();
-        }
-    }
-
-    public void listarCategoriasTras() {
-        RegistroLocadora atual = fim;
-        while (atual != null) {
-            System.out.println(atual.getInfo());
-            atual = atual.getAnt();
-        }
-    }
-
-    public Categoria buscarCategoria(String id) {
-        RegistroLocadora r = buscarRegistro(id);
-        return (r != null) ? (Categoria) r.getInfo() : null;
-    }
-
-    private RegistroLocadora buscarRegistro(String id) {
-        RegistroLocadora atual = inicio;
-        while (atual != null) {
-            Categoria cat = (Categoria) atual.getInfo();
-            if (String.valueOf(cat.getIdentificador()).equals(id)) {
-                return atual;
-            }
-            atual = atual.getProx();
-        }
-        return null;
-    }
-
-    private void insereFim(Categoria cat) {
-        RegistroLocadora novo = new RegistroLocadora(cat);
-        if (inicio == null) {
-            inicio = novo;
-            fim = novo;
-        } else {
-            fim.setProx(novo);
-            novo.setAnt(fim);
-            fim = novo;
-        }
-    }
-
-    private boolean temVeiculosAtrelados(int idCategoria) {
-        try (BufferedReader br = new BufferedReader(new FileReader("veiculos.csv"))) {
-            String linha;
-            br.readLine();
-            while ((linha = br.readLine()) != null) {
-                String[] partes = linha.split(";");
-                int idCat = Integer.parseInt(partes[2]); // ajustar se necessário
-                if (idCat == idCategoria) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            System.out.println("Erro ao verificar veículos: " + e.getMessage());
-        }
-        return false;
-    }
-
-    public void mostrarMenu() {
         while (true) {
             System.out.println("\n╔══════════════════════════════════════╗");
             System.out.println("║         GERENCIAR CATEGORIAS         ║");
@@ -145,8 +32,9 @@ public class CategoriaService {
             System.out.println("║ 0. Voltar                            ║");
             System.out.println("╚══════════════════════════════════════╝");
             System.out.print("Escolha uma opção: ");
+
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer
+            scanner.nextLine();
 
             switch (opcao) {
                 case 1: adicionarCategoria(); break;
@@ -160,49 +48,86 @@ public class CategoriaService {
         }
     }
 
-
     private void adicionarCategoria() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Digite o nome da nova categoria: ");
         String nome = scanner.nextLine();
+
         System.out.print("Digite o identificador da nova categoria: ");
         int id = scanner.nextInt();
-        scanner.nextLine(); // Limpar o buffer
-        Categoria nova = new Categoria(nome, id);
-        if (adicionarCategoria(nova)) {
-            System.out.println("Categoria adicionada com sucesso!");
-        } else {
-            System.out.println("Erro ao adicionar categoria.");
+
+        if (buscarCategoria(id) != null) {
+            System.out.println("Categoria já existe.");
+            return;
         }
+
+        Categoria nova = new Categoria(nome, id);
+        categorias.insereFim(nova);
+        System.out.println("Categoria adicionada com sucesso!");
     }
 
     private void editarCategoria() {
+        Scanner scanner = new Scanner(System.in);
+
         System.out.print("Digite o identificador da categoria a ser editada: ");
         int id = scanner.nextInt();
-        scanner.nextLine();
+        scanner.nextLine(); // Limpar o buffer
+
+        Categoria categoria = buscarCategoria(id);
+        if (categoria == null) {
+            System.out.println("Categoria não encontrada.");
+            return;
+        }
+
         System.out.print("Digite o novo nome da categoria: ");
         String novoNome = scanner.nextLine();
-        if (editarCategoria(id, novoNome)) {
-            System.out.println("Categoria editada com sucesso!");
-        } else {
-            System.out.println("Erro ao editar categoria.");
-        }
+
+        categoria.setNome(novoNome);
+        System.out.println("Categoria editada com sucesso!");
     }
 
-    private void listarCategorias() {
-        System.out.println("\nCategorias listadas do começo para o fim:");
-        listarCategoriasFrente();
-        System.out.println("\nCategorias listadas do fim para o começo:");
-        listarCategoriasTras();
+    private void listarCategoriasFrente() {
+        categorias.imprimeDoComeco();
+    }
+
+    private void listarCategoriasTras() {
+        categorias.imprimeDoFim();
     }
 
     private void excluirCategoria() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Digite o identificador da categoria a ser excluída: ");
         int id = scanner.nextInt();
-        if (excluirCategoria(id)) {
-            System.out.println("Categoria excluída com sucesso!");
-        } else {
-            System.out.println("Erro ao excluir categoria.");
+        Categoria categoria = buscarCategoria(id);
+
+        if (categoria == null) {
+            System.out.println("Categoria não encontrada.");
+            return;
         }
+
+        if (veiculoAtrelado(categoria)) {
+            System.out.println("Não é possível excluir a categoria. Existem veículos atrelados a ela.");
+            return;
+        }
+
+        categorias.remove(String.valueOf(categoria.getIdentificador()));
+        System.out.println("Categoria excluída com sucesso!");
     }
+
+    private boolean veiculoAtrelado(Categoria categoria) {
+    RegistroLocadora atual = veiculos.getInicio();
+    while (atual != null) {
+        Veiculo veiculo = (Veiculo) atual.getInfo();
+        if (veiculo != null && veiculo.getCategoria().equals(categoria)) {
+            return true;
+        }
+        atual = atual.getProx();
+    }
+    return false;
 }
 
+    private Categoria buscarCategoria(int id) {
+        return (Categoria) categorias.busca(String.valueOf(id));
+    }
+}

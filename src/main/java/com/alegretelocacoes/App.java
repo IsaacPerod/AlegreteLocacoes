@@ -1,13 +1,11 @@
-package com.alegretelocacoes;
-
 import java.util.Scanner;
 
-import com.alegretelocacoes.models.*;
-import com.alegretelocacoes.services.ClienteService;
-import com.alegretelocacoes.services.LocacaoService;
-import com.alegretelocacoes.services.VeiculoService;
-import com.alegretelocacoes.services.CategoriaService;
-import com.alegretelocacoes.utils.ListaLocadora;
+import models.*;
+import services.ClienteService;
+import services.LocacaoService;
+import services.VeiculoService;
+import services.CategoriaService;
+import utils.ListaLocadora;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -20,15 +18,15 @@ public class App {
     private static ListaLocadora categorias = new ListaLocadora();
     private static ClienteService clienteService = new ClienteService(clientes, locacoes);
     private static LocacaoService locacaoService = new LocacaoService(locacoes, clientes, veiculos);
-    private static VeiculoService veiculoService = new VeiculoService(veiculos, categorias);
-    private static CategoriaService categoriaService;
+    private static VeiculoService veiculoService = new VeiculoService(veiculos, categorias, locacoes);
+    private static CategoriaService categoriaService = new CategoriaService(categorias, veiculos);
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Inicializar listas a partir dos arquivos CSV
         try {
             lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Categorias.csv");
-            categoriaService = new CategoriaService(categorias);
+            categoriaService = new CategoriaService(categorias, veiculos);
             lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Veiculos.csv");
         } catch (IOException e) {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
@@ -48,7 +46,7 @@ public class App {
             switch (opcao) {
                 case 1: clienteService.gerenciarClientes(); break;
                 case 2: veiculoService.gerenciarVeiculos(); break;
-                case 3: categoriaService.mostrarMenu(); break;
+                case 3: categoriaService.gerenciarCategorias(); break;
                 case 4: locacaoService.gerenciarLocacoes(); break;
                 case 0: System.out.println("Saindo..."); return;
                 default: System.out.println("Opcao invalida!");
@@ -89,7 +87,7 @@ public class App {
                     // Buscar a categoria correspondente
                     Categoria categoria = (Categoria) categorias.busca(String.valueOf(identificadorCategoria));
                     if (categoria != null) {
-                        veiculos.insereFim(new Veiculo(placa, modelo, marca, ano, lugares, potencia, categoria));
+                        veiculos.insereFim(new Veiculo(placa, modelo, marca, ano, potencia, lugares, categoria));
                     } else {
                         System.out.println("Categoria " + identificadorCategoria + " nao encontrada para o veiculo " + placa);
                     }

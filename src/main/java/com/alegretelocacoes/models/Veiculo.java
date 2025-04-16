@@ -1,4 +1,4 @@
-package com.alegretelocacoes.models;
+package models;
 
 public class Veiculo {
     private String placa;
@@ -22,7 +22,7 @@ public class Veiculo {
     @Override
     public String toString() {
         return "Veículo: " + modelo + " (" + marca + "), Placa: " + placa + ", Ano: " + ano + 
-               ", Potência: " + potencia + ", Lugares: " + lugares + ", Categoria: " + categoria;
+               ", Potência: " + potencia + ", Lugares: " + lugares + ", " + categoria;
     }
 
     public String getPlaca() {

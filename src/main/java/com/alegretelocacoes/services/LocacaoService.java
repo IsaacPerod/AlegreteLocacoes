@@ -1,7 +1,8 @@
-package com.alegretelocacoes.services;
+package services;
 
-import com.alegretelocacoes.models.*;
-import com.alegretelocacoes.utils.ListaLocadora;
+import models.*;
+import utils.ListaLocadora;
+import utils.RegistroLocadora;
 
 import java.text.ParseException;
 import java.util.Scanner;
@@ -19,30 +20,51 @@ public class LocacaoService {
     }
 
     public void gerenciarLocacoes() {
-        System.out.println("\n╔════════════════════════════════════════════╗");
-        System.out.println("║             GERENCIAR LOCAÇÕES             ║");
-        System.out.println("╠════╗═══════════════════════════════════════╣");
-        System.out.println("║ 1  ║ Incluir Locação                       ║");
-        System.out.println("║ 2  ║ Excluir Locação                       ║");
-        System.out.println("║ 3  ║ Listar Locações Ativas do começo      ║");
-        System.out.println("║ 4  ║ Listar Locações Ativas do fim         ║");
-        System.out.println("╠════╝═══════════════════════════════════════╣");
-        System.out.println("║ 0. Voltar                                  ║");
-        System.out.println("╚════════════════════════════════════════════╝");
-        System.out.print("Escolha: ");
-        
-        int op = scanner.nextInt();
-        scanner.nextLine();
 
-        switch (op) {
-            case 1: incluirLocacao(); break;
-            case 2: excluirLocacao(); break;
-            case 3: locacoes.imprimeDoComeco(); break;
-            case 4: locacoes.imprimeDoFim(); break;
-            case 0: return;
-            default: System.out.println("Opcao invalida!");
+        while (true) {
+            System.out.println("\n╔════════════════════════════════════════════╗");
+            System.out.println("║             GERENCIAR LOCAÇÕES             ║");
+            System.out.println("╠════╗═══════════════════════════════════════╣");
+            System.out.println("║ 1  ║ Listar Veiculos Disponiveis           ║");
+            System.out.println("║ 2  ║ Incluir Locação                       ║");
+            System.out.println("║ 3  ║ Excluir Locação                       ║");
+            System.out.println("║ 4  ║ Listar Locações Ativas do começo      ║");
+            System.out.println("║ 5  ║ Listar Locações Ativas do fim         ║");
+            System.out.println("╠════╝═══════════════════════════════════════╣");
+            System.out.println("║ 0. Voltar                                  ║");
+            System.out.println("╚════════════════════════════════════════════╝");
+            System.out.print("Escolha: ");
+            
+            int op = scanner.nextInt();
+            scanner.nextLine();
+
+            switch (op) {
+                case 1: listarVeiculosNaoLocados(); break;
+                case 2: incluirLocacao(); break;
+                case 3: excluirLocacao(); break;
+                case 4: locacoes.imprimeDoComeco(); break;
+                case 5: locacoes.imprimeDoFim(); break;
+                case 0: return;
+                default: System.out.println("Opcao invalida!");
+            }
         }
     }
+
+    public void listarVeiculosNaoLocados() {
+    RegistroLocadora atualVeiculo = veiculos.getInicio();
+
+    System.out.println("Veculos Disponiveis:");
+    while (atualVeiculo != null) {
+        Veiculo veiculo = (Veiculo) atualVeiculo.getInfo();
+        if (veiculo != null) {
+            Locacao locacao = (Locacao) locacoes.busca(veiculo.getPlaca());
+            if (locacao == null) {
+                System.out.println(veiculo);
+            }
+        }
+        atualVeiculo = atualVeiculo.getProx();
+    }
+}
 
     private void incluirLocacao() {
         System.out.print("CPF do cliente: ");

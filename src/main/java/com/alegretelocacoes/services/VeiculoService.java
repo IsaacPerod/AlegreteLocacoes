@@ -1,16 +1,20 @@
-package com.alegretelocacoes.services;
+package services;
 
-import com.alegretelocacoes.models.Categoria;
-import com.alegretelocacoes.models.Veiculo;
-import com.alegretelocacoes.utils.ListaLocadora;
+import models.Categoria;
+import models.Locacao;
+import models.Veiculo;
+import utils.ListaLocadora;
+import utils.RegistroLocadora;
 
 import java.util.Scanner;
 
 public class VeiculoService {
     private ListaLocadora veiculos;
     private ListaLocadora categorias;
+    private ListaLocadora locacoes;
 
-    public VeiculoService(ListaLocadora veiculos, ListaLocadora categorias) {
+    public VeiculoService(ListaLocadora veiculos, ListaLocadora categorias, ListaLocadora locacoes) {
+        this.locacoes = locacoes;
         this.veiculos = veiculos;
         this.categorias = categorias;
     }
@@ -18,30 +22,32 @@ public class VeiculoService {
     public void gerenciarVeiculos() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║          GERENCIAR VEÍCULOS          ║");
-        System.out.println("╠════╗═════════════════════════════════╣");
-        System.out.println("║ 1  ║ Criar Veículo                   ║");
-        System.out.println("║ 2  ║ Listar Veículo - Começo ao fim  ║");
-        System.out.println("║ 3  ║ Listar Veículo - Fim o começo   ║");
-        System.out.println("║ 4  ║ Atualizar Veículos              ║");
-        System.out.println("║ 5  ║ Remover Veículo                 ║");
-        System.out.println("╠════╝═════════════════════════════════╣");
-        System.out.println("║ 0. Voltar                            ║");
-        System.out.println("╚══════════════════════════════════════╝");
-        System.out.print("Escolha: ");
+        while (true) {
+            System.out.println("\n╔══════════════════════════════════════╗");
+            System.out.println("║          GERENCIAR VEÍCULOS          ║");
+            System.out.println("╠════╗═════════════════════════════════╣");
+            System.out.println("║ 1  ║ Criar Veículo                   ║");
+            System.out.println("║ 2  ║ Listar Veículo - Começo ao fim  ║");
+            System.out.println("║ 3  ║ Listar Veículo - Fim o começo   ║");
+            System.out.println("║ 4  ║ Atualizar Veículos              ║");
+            System.out.println("║ 5  ║ Remover Veículo                 ║");
+            System.out.println("╠════╝═════════════════════════════════╣");
+            System.out.println("║ 0. Voltar                            ║");
+            System.out.println("╚══════════════════════════════════════╝");
+            System.out.print("Escolha: ");
 
-        int op = scanner.nextInt();
-        scanner.nextLine();
+            int op = scanner.nextInt();
+            scanner.nextLine();
 
-        switch (op) {
-            case 1: criarVeiculo(); break;
-            case 2: imprimeDoComeco(); break;
-            case 3: imprimeDoFim(); break;
-            case 4: atualizarVeiculos(); break;
-            case 5: removerVeiculo(); break;
-            case 0: { return; }
-            default: System.out.println("Opção inválida!");
+            switch (op) {
+                case 1: criarVeiculo(); break;
+                case 2: imprimeDoComeco(); break;
+                case 3: imprimeDoFim(); break;
+                case 4: atualizarVeiculos(); break;
+                case 5: removerVeiculo(); break;
+                case 0: { return; }
+                default: System.out.println("Opção inválida!");
+            }
         }
     }
 
@@ -211,13 +217,27 @@ public class VeiculoService {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite a placa do veículo a ser removido: ");
         String placa = scanner.nextLine();
-
         Veiculo veiculo = (Veiculo) veiculos.busca(placa);
-        if (veiculo != null) {
-            veiculos.remove(placa);
-            System.out.println("Veículo removido com sucesso!");
-        } else {
+
+        if (veiculo == null) {
             System.out.println("Veículo não encontrado!");
+            return;
+        }
+
+        RegistroLocadora atual = locacoes.getInicio();
+        while (atual != null) {
+            Locacao locacao = (Locacao) atual.getInfo();
+            if (locacao != null && locacao.getPlacaVeiculo().equals(veiculo.getPlaca())) {
+                System.out.println("Nao eh possivel excluir o veiculo. Ele esta atrelado a uma locação.");
+                return;
+            }
+            atual = atual.getProx();
+        }
+
+        if (veiculos.remove(placa)) {
+            System.out.println("Veiculo excluido com sucesso!");
+        } else {
+            System.out.println("Erro ao excluir o Veiculo.");
         }
     }
 }

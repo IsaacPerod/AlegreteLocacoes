@@ -1,7 +1,7 @@
-package com.alegretelocacoes.utils;
+package utils;
 
-import com.alegretelocacoes.interfaces.ILocadoraLista;
-import com.alegretelocacoes.models.*;
+import interfaces.ILocadoraLista;
+import models.*;
 
 public class ListaLocadora implements ILocadoraLista {
     private RegistroLocadora inicio;
@@ -78,7 +78,6 @@ public class ListaLocadora implements ILocadoraLista {
         return (atual != null) ? atual.getInfo() : null;
     }
 
-    // Método auxiliar para buscar o registro (renomeado de buscaNo para buscaRegistro)
     private RegistroLocadora buscaRegistro(String chave) {
         RegistroLocadora atual = inicio;
         while (atual != null) {

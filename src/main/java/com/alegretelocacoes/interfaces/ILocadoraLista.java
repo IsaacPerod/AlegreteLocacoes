@@ -4,7 +4,7 @@
  * removing elements by key, searching elements, printing in both directions,
  * checking if the list is empty and getting its size.
  */
-package com.alegretelocacoes.interfaces;
+package interfaces;
 
 public interface ILocadoraLista {
     

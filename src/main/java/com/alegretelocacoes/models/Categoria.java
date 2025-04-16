@@ -1,4 +1,4 @@
-package com.alegretelocacoes.models;
+package models;
 /*
                     "1 - 1010;esportivo\n" +
                     "2 - 1011;sedan comptacto\n" +
