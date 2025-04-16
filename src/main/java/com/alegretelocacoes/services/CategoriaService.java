@@ -138,8 +138,9 @@ public class CategoriaService {
             System.out.println("╠════╗═════════════════════════════════╣");
             System.out.println("║ 1  ║ Adicionar Categoria             ║");
             System.out.println("║ 2  ║ Editar Categoria                ║");
-            System.out.println("║ 3  ║ Listar Categorias               ║");
-            System.out.println("║ 4  ║ Excluir Categoria               ║");
+            System.out.println("║ 3  ║ Listar Categorias do começo     ║");
+            System.out.println("║ 4  ║ Listar Categorias do fim        ║");
+            System.out.println("║ 5  ║ Excluir Categoria               ║");
             System.out.println("╠════╝═════════════════════════════════╣");
             System.out.println("║ 0. Voltar                            ║");
             System.out.println("╚══════════════════════════════════════╝");
@@ -150,13 +151,15 @@ public class CategoriaService {
             switch (opcao) {
                 case 1: adicionarCategoria(); break;
                 case 2: editarCategoria(); break;
-                case 3: listarCategorias(); break;
-                case 4: excluirCategoria(); break;
+                case 3: listarCategoriasFrente(); break;
+                case 4: listarCategoriasTras(); break;
+                case 5: excluirCategoria(); break;
                 case 0: return;
                 default: System.out.println("Opção inválida!");
             }
         }
     }
+
 
     private void adicionarCategoria() {
         System.out.print("Digite o nome da nova categoria: ");

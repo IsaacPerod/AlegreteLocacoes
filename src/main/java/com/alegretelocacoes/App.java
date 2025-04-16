@@ -115,7 +115,7 @@ public class App {
     // Método não utilizado
     private static void gerenciarClientes() {
         System.out.println("1. Incluir Cliente");
-        System.out.println("2. Imprimir Clientes (frente)");
+        System.out.println("2. Imprimir Clientes do começo");
         System.out.println("3. Imprimir Clientes (trás)");
         System.out.print("Escolha: ");
         int op = scanner.nextInt();
