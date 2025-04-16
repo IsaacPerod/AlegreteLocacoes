@@ -1,4 +1,6 @@
-package com.alegretelocacoes;
+package interfaces;
+
+//package com.alegretelocacoes;
 
 public interface ILocadoraLista {
     

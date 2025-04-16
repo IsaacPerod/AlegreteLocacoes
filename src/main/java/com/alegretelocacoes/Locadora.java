@@ -1,11 +1,10 @@
-package com.alegretelocacoes;
+//package com.alegretelocacoes;
 
 import java.util.Scanner;
 
-import models.Categoria;
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+import models.*;
+import services.*;
+import utils.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -22,8 +21,8 @@ public class Locadora {
     public static void main(String[] args) {
         // Inicializar listas a partir dos arquivos CSV
         try {
-            lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\Categorias.csv");
-            lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\Veiculos.csv");
+            lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Categorias.csv");
+            lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Veiculos.csv");
         } catch (IOException e) {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
         }

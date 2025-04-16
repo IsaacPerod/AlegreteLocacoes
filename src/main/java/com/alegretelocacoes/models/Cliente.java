@@ -1,4 +1,4 @@
-package com.alegretelocacoes.models;
+package models;
 
 public class Cliente {
     private String nome;

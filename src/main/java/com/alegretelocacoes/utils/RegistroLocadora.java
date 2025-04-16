@@ -1,4 +1,6 @@
-package com.alegretelocacoes;
+package utils;
+
+//package com.alegretelocacoes;
 
 public class RegistroLocadora {
     private Object info;

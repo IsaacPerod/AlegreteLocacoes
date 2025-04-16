@@ -1,7 +1,9 @@
+package services;
+
 import java.util.Scanner;
 
-import models.Cliente;
-import models.Locacao;
+import models.*;
+import utils.*;
 
 public class ClienteService {
     private ListaLocadora clientes;

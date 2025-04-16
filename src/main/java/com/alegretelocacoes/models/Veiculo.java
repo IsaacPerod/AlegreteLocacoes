@@ -1,4 +1,4 @@
-package com.alegretelocacoes.models;
+package models;
 
 public class Veiculo {
     private String placa;

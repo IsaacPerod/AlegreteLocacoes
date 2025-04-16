@@ -1,6 +1,7 @@
-import models.Cliente;
-import models.Locacao;
-import models.Veiculo;
+package services;
+
+import models.*;
+import utils.*;
 
 import java.text.ParseException;
 import java.util.Scanner;

@@ -1,5 +1,8 @@
-package com.alegretelocacoes;
-import com.alegretelocacoes.models.*;
+package utils;
+
+//package com.alegretelocacoes;
+import models.*;
+import interfaces.*;
 
 public class ListaLocadora implements ILocadoraLista {
     private RegistroLocadora inicio;
