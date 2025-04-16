@@ -1,3 +1,5 @@
+package com.alegretelocacoes;
+
 public class RegistroLocadora {
     private Object info;
     private RegistroLocadora ant;

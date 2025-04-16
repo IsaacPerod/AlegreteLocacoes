@@ -1,4 +1,4 @@
-package models;
+package com.alegretelocacoes.models;
 
 public class Categoria {
     private String nome;

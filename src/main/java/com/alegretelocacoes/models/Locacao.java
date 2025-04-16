@@ -1,4 +1,4 @@
-package models;
+package com.alegretelocacoes.models;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

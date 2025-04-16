@@ -30,6 +30,11 @@
             <version>1.4.200</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>
+            <groupId>com.alegretelocacoes</groupId>
+            <artifactId>AlegreteLocacoes</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

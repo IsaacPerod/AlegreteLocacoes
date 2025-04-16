@@ -1,0 +1,8 @@
+Locadora.class
+ListaLocadora.class
+models\Locacao.class
+models\Veiculo.class
+RegistroLocadora.class
+models\Cliente.class
+models\Categoria.class
+ILocadoraLista.class

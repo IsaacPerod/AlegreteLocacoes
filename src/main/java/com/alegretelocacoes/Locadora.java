@@ -1,7 +1,10 @@
+
+
 import java.util.Scanner;
 
 import models.Categoria;
 import models.Cliente;
+import models.Locacao;
 import models.Veiculo;
 import java.io.BufferedReader;
 import java.io.FileReader;
