@@ -90,8 +90,8 @@ public class ClienteService {
             return;
         }
 
-        // Verificar se o cliente está atrelado a uma locação
-        RegistroLocadora atual = locacoes.getInicio(); // Supondo que exista um método para obter o início da lista
+
+        RegistroLocadora atual = locacoes.getInicio();
         while (atual != null) {
             Locacao locacao = (Locacao) atual.getInfo();
             if (locacao != null && locacao.getCnhCliente().equals(cliente.getCnh())) {
