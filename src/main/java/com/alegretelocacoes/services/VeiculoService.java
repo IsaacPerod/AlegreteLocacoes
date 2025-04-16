@@ -73,8 +73,14 @@ public class VeiculoService {
     public void listarVeiculos(ListaLocadora veiculos) {
         Scanner scanner = new Scanner(System.in);
         
-        System.out.println("\n1 - Listar do início ao fim");
-        System.out.println("2 - Listar do fim ao início");
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║         LISTAGEM DE Veiculos           ║");
+        System.out.println("╠════╗═══════════════════════════════════╣");
+        System.out.println("║ 1  ║ Listar do início ao fim           ║");
+        System.out.println("║ 2  ║ Listar do fim ao início           ║");
+        System.out.println("╠════╝═══════════════════════════════════╣");
+        System.out.println("║ 0. Voltar                              ║");
+        System.out.println("╚════════════════════════════════════════╝");
         System.out.print("Escolha uma opção: ");
         
         int opcao = scanner.nextInt();
@@ -96,8 +102,8 @@ public class VeiculoService {
     public void atualizarVeiculos(ListaLocadora veiculos) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite a placa do veículo a ser atualizado: ");
-        scanner.close();
         String placa = scanner.nextLine();
+        //scanner.close();
 
         Veiculo veiculo = (Veiculo) veiculos.busca(placa);
         if (veiculo != null) {
@@ -140,13 +146,13 @@ public class VeiculoService {
                     break;
                 case 6:
                     System.out.print("Nova categoria: ");
-                    String categorias_veiculos = "\n1 - 1010;esportivo\n" +
-                            "2 - 1011;sedan comptacto\n" +
-                            "3 - 1012;sedan medio\n" +
-                            "4 - 1013;SUV compacto\n" +
-                            "5 - 1014;SUV\n" +
-                            "6 - 1015;caminhonete\n" +
-                            "7 - 1016;hatch";
+                    String categorias_veiculos = "\n1 - 1010 - esportivo\n" +
+                            "2 - 1011 - sedan comptacto\n" +
+                            "3 - 1012 - sedan medio\n" +
+                            "4 - 1013 - SUV compacto\n" +
+                            "5 - 1014 - SUV\n" +
+                            "6 - 1015 - caminhonete\n" +
+                            "7 - 1016 - hatch";
                     System.out.println("Categorias: " + categorias_veiculos);
 
                     int escolhaCategoria = scanner.nextInt();
