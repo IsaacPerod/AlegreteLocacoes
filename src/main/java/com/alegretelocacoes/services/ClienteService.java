@@ -6,6 +6,7 @@ import com.alegretelocacoes.models.*;
 import com.alegretelocacoes.utils.ListaLocadora;
 import com.alegretelocacoes.utils.RegistroLocadora;
 
+
 public class ClienteService {
     private ListaLocadora clientes;
     private ListaLocadora locacoes;
