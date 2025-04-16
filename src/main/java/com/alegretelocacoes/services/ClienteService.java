@@ -18,11 +18,18 @@ public class ClienteService {
     }
 
     public void gerenciarClientes() {
-        System.out.println("1. Incluir Cliente");
-        System.out.println("2. Imprimir Clientes do comeco");
-        System.out.println("3. Imprimir Clientes do fim");
-        System.out.println("4. Editar Cliente");
-        System.out.println("5. Excluir Cliente");
+        System.out.println("\n╔════════════════════════════════════════╗");
+        System.out.println("║         GERENCIAR CLIENTES             ║");
+        System.out.println("╠════╗═══════════════════════════════════╣");
+        System.out.println("║ 1  ║ Incluir Cliente                   ║");
+        System.out.println("║ 2  ║ Imprimir Clientes do começo       ║");
+        System.out.println("║ 3  ║ Imprimir Clientes do fim          ║");
+        System.out.println("║ 4  ║ Editar Cliente                    ║");
+        System.out.println("║ 5  ║ Excluir Cliente                   ║");
+        System.out.println("╠════╝═══════════════════════════════════╣");
+        System.out.println("║ 0  Voltar                              ║");
+        System.out.println("╚════════════════════════════════════════╝");
+        
         System.out.print("Escolha: ");
         int op = scanner.nextInt();
         scanner.nextLine();
@@ -33,6 +40,7 @@ public class ClienteService {
             case 3: clientes.imprimeDoFim(); break;
             case 4: editarCliente(); break;
             case 5: excluirCliente(); break;
+            case 0: return;
             default: System.out.println("Opcao invalida!");
         }
     }

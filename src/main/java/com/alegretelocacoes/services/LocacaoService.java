@@ -19,11 +19,18 @@ public class LocacaoService {
     }
 
     public void gerenciarLocacoes() {
-        System.out.println("1. Incluir Locacao");
-        System.out.println("2. Excluir Locacao");
-        System.out.println("3. Listar Locacoes Ativas do comeco");
-        System.out.println("4. Listar Locacoes Ativas do fim");
+        System.out.println("\n╔════════════════════════════════════════════╗");
+        System.out.println("║             GERENCIAR LOCAÇÕES             ║");
+        System.out.println("╠════╗═══════════════════════════════════════╣");
+        System.out.println("║ 1  ║ Incluir Locação                       ║");
+        System.out.println("║ 2  ║ Excluir Locação                       ║");
+        System.out.println("║ 3  ║ Listar Locações Ativas do começo      ║");
+        System.out.println("║ 4  ║ Listar Locações Ativas do fim         ║");
+        System.out.println("╠════╝═══════════════════════════════════════╣");
+        System.out.println("║ 0. Voltar                                  ║");
+        System.out.println("╚════════════════════════════════════════════╝");
         System.out.print("Escolha: ");
+        
         int op = scanner.nextInt();
         scanner.nextLine();
 
@@ -32,6 +39,7 @@ public class LocacaoService {
             case 2: excluirLocacao(); break;
             case 3: locacoes.imprimeDoComeco(); break;
             case 4: locacoes.imprimeDoFim(); break;
+            case 0: return;
             default: System.out.println("Opcao invalida!");
         }
     }

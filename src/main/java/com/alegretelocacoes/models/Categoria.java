@@ -29,4 +29,10 @@ public class Categoria {
     public String toString() {
         return "Categoria: " + nome + " (ID: " + identificador + ")";
     }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+
 }

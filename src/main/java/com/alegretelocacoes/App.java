@@ -6,6 +6,7 @@ import com.alegretelocacoes.models.*;
 import com.alegretelocacoes.services.ClienteService;
 import com.alegretelocacoes.services.LocacaoService;
 import com.alegretelocacoes.services.VeiculoService;
+import com.alegretelocacoes.services.CategoriaService;
 import com.alegretelocacoes.utils.ListaLocadora;
 
 import java.io.BufferedReader;
@@ -15,17 +16,19 @@ import java.io.IOException;
 public class App {
     private static ListaLocadora clientes = new ListaLocadora();
     private static ListaLocadora locacoes = new ListaLocadora();
-    private static ClienteService clienteService = new ClienteService(clientes, locacoes);
     private static ListaLocadora veiculos = new ListaLocadora();
     private static ListaLocadora categorias = new ListaLocadora();
+    private static ClienteService clienteService = new ClienteService(clientes, locacoes);
     private static LocacaoService locacaoService = new LocacaoService(locacoes, clientes, veiculos);
     private static VeiculoService veiculoService = new VeiculoService();
+    private static CategoriaService categoriaService;
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
         // Inicializar listas a partir dos arquivos CSV
         try {
             lerCategoriasCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Categorias.csv");
+            categoriaService = new CategoriaService(categorias);
             lerVeiculosCSV("src\\main\\java\\com\\alegretelocacoes\\data\\Veiculos.csv");
         } catch (IOException e) {
             System.out.println("Erro ao ler os arquivos CSV: " + e.getMessage());
@@ -96,15 +99,20 @@ public class App {
     }
 
     private static void exibirMenu() {
-        System.out.println("\n=== Locadora Alegrete ===");
-        System.out.println("1. Gerenciar Clientes");
-        System.out.println("2. Gerenciar Veiculos");
-        System.out.println("3. Gerenciar Categorias");
-        System.out.println("4. Gerenciar Locacoes");
-        System.out.println("0. Sair");
+        System.out.println("\n╔══════════════════════════╗");
+        System.out.println("║     LOCADORA ALEGRETE    ║");
+        System.out.println("╠═══╗══════════════════════╣");
+        System.out.println("║ 1 ║ Gerenciar Clientes   ║");
+        System.out.println("║ 2 ║ Gerenciar Veículos   ║");
+        System.out.println("║ 3 ║ Gerenciar Categorias ║");
+        System.out.println("║ 4 ║ Gerenciar Locações   ║");
+        System.out.println("╠═══╝══════════════════════╣");
+        System.out.println("║ 0  Sair                  ║");
+        System.out.println("╚══════════════════════════╝");
         System.out.print("Escolha uma opção: ");
     }
 
+    // Método não utilizado
     private static void gerenciarClientes() {
         System.out.println("1. Incluir Cliente");
         System.out.println("2. Imprimir Clientes (frente)");
@@ -132,11 +140,17 @@ public class App {
     }
 
     private static void gerenciarVeiculos() {
-        System.out.println("1. Criar Veículo");
-        System.out.println("2. Listar Veículo");
-        System.out.println("3. Atualizar Veículos");
-        System.out.println("4. Remover Veículo");
-        System.out.println("0. Voltar");
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║          GERENCIAR VEÍCULOS          ║");
+        System.out.println("╠════╗═════════════════════════════════╣");
+        System.out.println("║ 1  ║ Criar Veículo                   ║");
+        System.out.println("║ 2  ║ Listar Veículo                  ║");
+        System.out.println("║ 3  ║ Atualizar Veículos              ║");
+        System.out.println("║ 4  ║ Remover Veículo                 ║");
+        System.out.println("╠════╝═════════════════════════════════╣");
+        System.out.println("║ 0. Voltar                            ║");
+        System.out.println("╚══════════════════════════════════════╝");
+        System.out.print("Escolha: ");        
         int op = scanner.nextInt();
         scanner.nextLine();
         //scanner.close();
@@ -156,8 +170,7 @@ public class App {
     }
 
     private static void gerenciarCategorias() {
-        System.out.println("Função a ser implementada.");
+        categoriaService.mostrarMenu();
     }
 
-    
 }
