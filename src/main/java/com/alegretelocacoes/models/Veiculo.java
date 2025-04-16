@@ -18,10 +18,7 @@ public class Veiculo {
         this.lugares = lugares;
         this.categoria = categoria;
     }
-
-    public Veiculo(String placa, String modelo, String marca, int ano, int lugares, int potencia, Categoria categoria) {
-
-    }
+    
 
     public String getPlaca() {
         return placa;

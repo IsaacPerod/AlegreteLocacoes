@@ -1,4 +1,4 @@
-
+package com.alegretelocacoes;
 
 import java.util.Scanner;
 
