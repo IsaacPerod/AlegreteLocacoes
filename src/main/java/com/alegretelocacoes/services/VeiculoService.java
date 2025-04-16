@@ -39,15 +39,14 @@ public class VeiculoService {
             int op = scanner.nextInt();
             scanner.nextLine();
 
-            switch (op) {
-                case 1: criarVeiculo(); break;
-                case 2: imprimeDoComeco(); break;
-                case 3: imprimeDoFim(); break;
-                case 4: atualizarVeiculos(); break;
-                case 5: removerVeiculo(); break;
-                case 0: { return; }
-                default: System.out.println("Opção inválida!");
-            }
+        switch (op) {
+            case 1: criarVeiculo();  gerenciarVeiculos();break;
+            case 2: imprimeDoComeco(); gerenciarVeiculos();break;
+            case 3: imprimeDoFim(); gerenciarVeiculos();break;
+            case 4: atualizarVeiculos(); gerenciarVeiculos();break;
+            case 5: removerVeiculo(); gerenciarVeiculos();break;
+            case 0: { return; }
+            default: System.out.println("Opção inválida!");
         }
     }
 

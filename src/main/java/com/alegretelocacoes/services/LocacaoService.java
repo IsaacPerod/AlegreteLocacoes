@@ -38,33 +38,15 @@ public class LocacaoService {
             int op = scanner.nextInt();
             scanner.nextLine();
 
-            switch (op) {
-                case 1: listarVeiculosNaoLocados(); break;
-                case 2: incluirLocacao(); break;
-                case 3: excluirLocacao(); break;
-                case 4: locacoes.imprimeDoComeco(); break;
-                case 5: locacoes.imprimeDoFim(); break;
-                case 0: return;
-                default: System.out.println("Opcao invalida!");
-            }
+        switch (op) {
+            case 1: incluirLocacao(); gerenciarLocacoes(); break;
+            case 2: excluirLocacao(); gerenciarLocacoes(); break;
+            case 3: locacoes.imprimeDoComeco(); gerenciarLocacoes(); break;
+            case 4: locacoes.imprimeDoFim(); gerenciarLocacoes(); break;
+            case 0: return;
+            default: System.out.println("Opcao invalida!"); gerenciarLocacoes();
         }
     }
-
-    public void listarVeiculosNaoLocados() {
-    RegistroLocadora atualVeiculo = veiculos.getInicio();
-
-    System.out.println("Veculos Disponiveis:");
-    while (atualVeiculo != null) {
-        Veiculo veiculo = (Veiculo) atualVeiculo.getInfo();
-        if (veiculo != null) {
-            Locacao locacao = (Locacao) locacoes.busca(veiculo.getPlaca());
-            if (locacao == null) {
-                System.out.println(veiculo);
-            }
-        }
-        atualVeiculo = atualVeiculo.getProx();
-    }
-}
 
     private void incluirLocacao() {
         System.out.print("CPF do cliente: ");

@@ -36,13 +36,13 @@ public class ClienteService {
             scanner.nextLine();
 
             switch (op) {
-                case 1: incluirCliente(); break;
-                case 2: clientes.imprimeDoComeco(); break;
-                case 3: clientes.imprimeDoFim(); break;
-                case 4: editarCliente(); break;
-                case 5: excluirCliente(); break;
+                case 1: incluirCliente(); gerenciarClientes(); break;
+                case 2: clientes.imprimeDoComeco(); gerenciarClientes(); break;
+                case 3: clientes.imprimeDoFim(); gerenciarClientes(); break;
+                case 4: editarCliente(); gerenciarClientes(); break;
+                case 5: excluirCliente(); gerenciarClientes(); break;
                 case 0: return;
-                default: System.out.println("Opcao invalida!");
+                default: System.out.println("Opcao invalida!"); gerenciarClientes();
             }
         }
     }
@@ -89,8 +89,10 @@ public class ClienteService {
             cliente.setTelefone(novoTelefone);
         }
 
-        System.out.println("Cliente atualizado com sucesso!");
-    }
+        System.out.println("\n╔════════════════════════════════════╗");
+        System.out.println("║  Cliente atualizado com sucesso!   ║");
+        System.out.println("╚════════════════════════════════════╝");
+            }
 
     private void excluirCliente() {
         System.out.print("CPF do cliente a ser excluido: ");
@@ -98,7 +100,9 @@ public class ClienteService {
         Cliente cliente = (Cliente) clientes.busca(cpf);
 
         if (cliente == null) {
-            System.out.println("Cliente nao encontrado!");
+            System.out.println("\n╔══════════════════════════════╗");
+            System.out.println("║    Cliente não encontrado!   ║");
+            System.out.println("╚══════════════════════════════╝");
             return;
         }
 
@@ -107,7 +111,10 @@ public class ClienteService {
         while (atual != null) {
             Locacao locacao = (Locacao) atual.getInfo();
             if (locacao != null && locacao.getCnhCliente().equals(cliente.getCnh())) {
-                System.out.println("Nao eh possivel excluir o cliente. Ele esta atrelado a uma locação.");
+                System.out.println("\n╔════════════════════════════════════════════╗");
+                System.out.println("║  Não é possível excluir o cliente.         ║");
+                System.out.println("║  Ele está atrelado a uma locação.          ║");
+                System.out.println("╚════════════════════════════════════════════╝");
                 return;
             }
             atual = atual.getProx();
@@ -115,9 +122,13 @@ public class ClienteService {
 
         // Remover cliente
         if (clientes.remove(cpf)) {
-            System.out.println("Cliente excluido com sucesso!");
+            System.out.println("\n╔════════════════════════════════╗");
+            System.out.println("║  Cliente excluído com sucesso! ║");
+            System.out.println("╚════════════════════════════════╝");
         } else {
-            System.out.println("Erro ao excluir o cliente.");
+            System.out.println("\n╔═══════════════════════════════╗");
+            System.out.println("║   Erro ao excluir o cliente.  ║");
+            System.out.println("╚═══════════════════════════════╝");
         }
     }
 }
