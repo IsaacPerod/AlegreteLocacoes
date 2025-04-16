@@ -7,9 +7,54 @@ import com.alegretelocacoes.utils.ListaLocadora;
 import java.util.Scanner;
 
 public class VeiculoService {
-    public void criarVeiculo(ListaLocadora veiculos, ListaLocadora categorias) {
+    private ListaLocadora veiculos;
+    private ListaLocadora categorias;
+
+    public VeiculoService(ListaLocadora veiculos, ListaLocadora categorias) {
+        this.veiculos = veiculos;
+        this.categorias = categorias;
+    }
+
+    public void gerenciarVeiculos() {
         Scanner scanner = new Scanner(System.in);
-        // Seria interessante verificar se veículo já existe
+
+        System.out.println("\n╔══════════════════════════════════════╗");
+        System.out.println("║          GERENCIAR VEÍCULOS          ║");
+        System.out.println("╠════╗═════════════════════════════════╣");
+        System.out.println("║ 1  ║ Criar Veículo                   ║");
+        System.out.println("║ 2  ║ Listar Veículo - Começo ao fim  ║");
+        System.out.println("║ 3  ║ Listar Veículo - Fim o começo   ║");
+        System.out.println("║ 4  ║ Atualizar Veículos              ║");
+        System.out.println("║ 5  ║ Remover Veículo                 ║");
+        System.out.println("╠════╝═════════════════════════════════╣");
+        System.out.println("║ 0. Voltar                            ║");
+        System.out.println("╚══════════════════════════════════════╝");
+        System.out.print("Escolha: ");
+
+        int op = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (op) {
+            case 1: criarVeiculo(); break;
+            case 2: imprimeDoComeco(); break;
+            case 3: imprimeDoFim(); break;
+            case 4: atualizarVeiculos(); break;
+            case 5: removerVeiculo(); break;
+            case 0: { return; }
+            default: System.out.println("Opção inválida!");
+        }
+    }
+
+    public void imprimeDoComeco() {
+        veiculos.imprimeDoComeco();
+    }
+
+    public void imprimeDoFim() {
+        veiculos.imprimeDoFim();
+    }
+
+    public void criarVeiculo() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Placa: ");
         String placa = scanner.nextLine();
 
@@ -38,7 +83,6 @@ public class VeiculoService {
         System.out.println("Categorias: " + categorias_veiculos);
 
         int escolhaCategoria = scanner.nextInt();
-        //scanner.close();
 
         Categoria categoria;
         switch (escolhaCategoria) {
@@ -70,40 +114,10 @@ public class VeiculoService {
         System.out.println("Veículo adicionado!");
     }
 
-    public void listarVeiculos(ListaLocadora veiculos) {
-        Scanner scanner = new Scanner(System.in);
-        
-        System.out.println("\n╔════════════════════════════════════════╗");
-        System.out.println("║         LISTAGEM DE Veiculos           ║");
-        System.out.println("╠════╗═══════════════════════════════════╣");
-        System.out.println("║ 1  ║ Listar do início ao fim           ║");
-        System.out.println("║ 2  ║ Listar do fim ao início           ║");
-        System.out.println("╠════╝═══════════════════════════════════╣");
-        System.out.println("║ 0. Voltar                              ║");
-        System.out.println("╚════════════════════════════════════════╝");
-        System.out.print("Escolha uma opção: ");
-        
-        int opcao = scanner.nextInt();
-        
-        System.out.println("\nLista de Veículos:");
-        
-        switch (opcao) {
-            case 1:
-                veiculos.imprimeDoComeco();
-                break;
-            case 2:
-                veiculos.imprimeDoFim();
-                break;
-            default:
-                System.out.println("Opção inválida.");
-        }
-    }
-
-    public void atualizarVeiculos(ListaLocadora veiculos) {
+    public void atualizarVeiculos() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite a placa do veículo a ser atualizado: ");
         String placa = scanner.nextLine();
-        //scanner.close();
 
         Veiculo veiculo = (Veiculo) veiculos.busca(placa);
         if (veiculo != null) {
@@ -156,7 +170,6 @@ public class VeiculoService {
                     System.out.println("Categorias: " + categorias_veiculos);
 
                     int escolhaCategoria = scanner.nextInt();
-                    scanner.close();
 
                     Categoria categoria;
                     switch (escolhaCategoria) {
@@ -194,7 +207,7 @@ public class VeiculoService {
         }
     }
 
-    public void removerVeiculo(ListaLocadora veiculos) {
+    public void removerVeiculo() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite a placa do veículo a ser removido: ");
         String placa = scanner.nextLine();

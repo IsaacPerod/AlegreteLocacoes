@@ -20,7 +20,7 @@ public class App {
     private static ListaLocadora categorias = new ListaLocadora();
     private static ClienteService clienteService = new ClienteService(clientes, locacoes);
     private static LocacaoService locacaoService = new LocacaoService(locacoes, clientes, veiculos);
-    private static VeiculoService veiculoService = new VeiculoService();
+    private static VeiculoService veiculoService = new VeiculoService(veiculos, categorias);
     private static CategoriaService categoriaService;
     private static Scanner scanner = new Scanner(System.in);
 
@@ -47,8 +47,8 @@ public class App {
 
             switch (opcao) {
                 case 1: clienteService.gerenciarClientes(); break;
-                case 2: gerenciarVeiculos(); break;
-                case 3: gerenciarCategorias(); break;
+                case 2: veiculoService.gerenciarVeiculos(); break;
+                case 3: categoriaService.mostrarMenu(); break;
                 case 4: locacaoService.gerenciarLocacoes(); break;
                 case 0: System.out.println("Saindo..."); return;
                 default: System.out.println("Opcao invalida!");
@@ -111,66 +111,4 @@ public class App {
         System.out.println("╚══════════════════════════╝");
         System.out.print("Escolha uma opção: ");
     }
-
-    // Método não utilizado
-    private static void gerenciarClientes() {
-        System.out.println("1. Incluir Cliente");
-        System.out.println("2. Imprimir Clientes (frente)");
-        System.out.println("3. Imprimir Clientes (trás)");
-        System.out.print("Escolha: ");
-        int op = scanner.nextInt();
-        scanner.nextLine();
-
-        if (op == 1) {
-            System.out.print("Nome: ");
-            String nome = scanner.nextLine();
-            System.out.print("CNH: ");
-            String cnh = scanner.nextLine();
-            System.out.print("Telefone: ");
-            String telefone = scanner.nextLine();
-            System.out.print("CPF: ");
-            String cpf = scanner.nextLine();
-            clientes.insereFim(new Cliente(nome, cnh, telefone, cpf));
-            System.out.println("Cliente adicionado!");
-        } else if (op == 2) {
-            clientes.imprimeDoComeco();
-        } else if (op == 3) {
-            clientes.imprimeDoFim();
-        }
-    }
-
-    private static void gerenciarVeiculos() {
-        System.out.println("\n╔══════════════════════════════════════╗");
-        System.out.println("║          GERENCIAR VEÍCULOS          ║");
-        System.out.println("╠════╗═════════════════════════════════╣");
-        System.out.println("║ 1  ║ Criar Veículo                   ║");
-        System.out.println("║ 2  ║ Listar Veículo                  ║");
-        System.out.println("║ 3  ║ Atualizar Veículos              ║");
-        System.out.println("║ 4  ║ Remover Veículo                 ║");
-        System.out.println("╠════╝═════════════════════════════════╣");
-        System.out.println("║ 0. Voltar                            ║");
-        System.out.println("╚══════════════════════════════════════╝");
-        System.out.print("Escolha: ");        
-        int op = scanner.nextInt();
-        scanner.nextLine();
-        //scanner.close();
-        if (op == 1) {
-            veiculoService.criarVeiculo(veiculos, categorias);  
-             
-        }
-        if (op == 2) {
-            veiculoService.listarVeiculos(veiculos);
-        }
-        if (op == 3) {
-            veiculoService.atualizarVeiculos(veiculos);
-        }
-        if (op == 4) {
-            veiculoService.removerVeiculo(veiculos);
-        }
-    }
-
-    private static void gerenciarCategorias() {
-        categoriaService.mostrarMenu();
-    }
-
 }
